@@ -1,5 +1,9 @@
 # for swapping nodes:
 
+#######################
+# NODE CLASS
+#######################
+
 class Node:
     def __init__(self, value, next_node=None):
         self.value = value
@@ -10,6 +14,11 @@ class Node:
         return self.next_node
     def set_next_node(self, next_node):
         self.next_node = next_node
+
+
+#######################
+# LINKED LIST CLASS
+#######################
 
 class LinkedList:
     def __init__(self, value=None):
@@ -40,6 +49,11 @@ class LinkedList:
                     current_node = None
                 else:
                     current_node = next_node
+
+
+#######################
+# SWAP NODES FUNCTION
+#######################
 
 def swap_nodes(input_list, val1, val2):
     print(f'Swapping {val1} with {val2}')
@@ -104,6 +118,53 @@ def swap_nodes(input_list, val1, val2):
     # set node2's next node to temp
     node2.set_next_node(temp)
 
+    
+#######################
+# FIND THE NTH LAST NODE
+#######################
+
+
+def nth_last_node(linked_list, n):
+    current = None
+    tail_seeker = linked_list.head_node
+    count = 1
+    while tail_seeker:
+        tail_seeker = tail_seeker.get_next_node()
+        count += 1
+        if count >= n + 1:
+            if current is None:
+                current = linked_list.head_node
+            else:
+                current = current.get_next_node()
+    return current
+
+#######################
+# FIND MIDDLE NODE
+#######################
+
+# concept: have two pointers; 
+# 1 will be fast (moves 2x node), and
+# 1 slow (moves 1x node)
+
+
+def find_middle(linked_list):
+    # set both pointers to be at the head_node
+    fast = linked_list.head_node
+    slow = linked_list.head_node
+
+    # while we're not at the end of the ll
+    while fast:
+        # move up fast
+        fast = fast.get_next_node()
+
+        # if fast isn't None
+        if fast:
+            # move both up
+            fast = fast.get_next_node()
+            slow = slow.get_next_node()
+    return slow
+
+
 
 ll = LinkedList()
 for i in range(10):
@@ -112,3 +173,19 @@ for i in range(10):
 print(ll.stringify_list())
 swap_nodes(ll, 9, 5)
 print(ll.stringify_list())
+
+"""
+Time and Space Complexity:
+
+The worst case for time complexity in swap_nodes() is if 
+both while loops must iterate all the way through to the end 
+(either if there are no matching nodes, 
+or if the matching node is at the tail). 
+
+This means that it has a linear big O runtime of O(n), 
+since each while loop has a O(n) runtime, and constants are dropped.
+
+There are four new variables created in the function 
+regardless of the input, which means that it has a 
+constant space complexity of O(1).
+"""
