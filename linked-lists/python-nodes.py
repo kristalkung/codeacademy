@@ -2,6 +2,7 @@
 # define a Node class with methods:
 # set_link_node(), get_link_node, and get_value
 class Node:
+    # link_node should default to =None
     def __init__(self, value, link_node=None):
         self.value = value
         self.link_node = link_node
