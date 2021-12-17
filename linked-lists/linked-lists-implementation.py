@@ -24,8 +24,13 @@ class LinkedList:
     # Add your insert_beginning and stringify_list methods below:
 
     def insert_beginning(self, new_value):
+        # instantiate the new_value into a Node as new_node
         new_node = Node(new_value)
+
+        # point new_node's next node as the head_node
         new_node.set_next_node(self.head_node)
+        
+        # set head_node as new_node
         self.head_node = new_node
         
     # return all the nodes in the list as a string 
